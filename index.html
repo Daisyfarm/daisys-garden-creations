@@ -12,7 +12,6 @@ body {
     background: #f7f7f7;
 }
 
-/* HEADER */
 header {
     background: linear-gradient(135deg, #1b5e20, #43a047);
     color: white;
@@ -20,13 +19,11 @@ header {
     padding: 50px 20px;
 }
 
-/* SECTIONS */
 section {
     text-align: center;
     padding: 25px;
 }
 
-/* CART */
 .cart {
     position: fixed;
     top: 15px;
@@ -38,7 +35,6 @@ section {
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* GRID */
 .container {
     max-width: 1200px;
     margin: auto;
@@ -48,7 +44,6 @@ section {
     gap: 25px;
 }
 
-/* CARD */
 .card {
     background: white;
     border-radius: 14px;
@@ -79,7 +74,12 @@ section {
     font-weight: bold;
 }
 
-/* BUTTON */
+.deal {
+    color: #ff9800;
+    font-weight: bold;
+    font-size: 14px;
+}
+
 button {
     background: #1b5e20;
     color: white;
@@ -100,7 +100,6 @@ button:hover {
     margin-top: 10px;
 }
 
-/* LIGHTBOX */
 .lightbox {
     display: none;
     position: fixed;
@@ -118,7 +117,6 @@ button:hover {
     max-height: 90%;
 }
 
-/* FOOTER */
 footer {
     text-align: center;
     padding: 20px;
@@ -133,19 +131,8 @@ footer {
 <header>
     <h1>🌼 Daisy's Garden Creations</h1>
     <p>Premium Handcrafted Garden Ornaments • UK Delivery</p>
+    <p class="deal">🔥 Special Offer: Any 2 for £30 🔥</p>
 </header>
-
-<section>
-    <h2>🌿 About Us</h2>
-    <p>Handcrafted, high-quality garden ornaments designed to bring your garden to life.</p>
-</section>
-
-<section>
-    <h2>⭐ Customer Reviews</h2>
-    <p>★★★★★ "Amazing quality!"</p>
-    <p>★★★★★ "Looks even better in person"</p>
-    <p>★★★★★ "Fast delivery"</p>
-</section>
 
 <!-- CART -->
 <div class="cart">
@@ -163,15 +150,15 @@ footer {
     </form>
 </div>
 
-<!-- PRODUCTS -->
 <div class="container">
 
     <div class="card">
         <img src="IMG_9480.jpg" onclick="openImg(this.src)">
         <div class="card-content">
-            <h3>Stone Statue</h3>
-            <p class="price">£45</p>
-            <button onclick="addToCart('Stone Statue',45)">Add to Cart</button>
+            <h3>Garden Ornament</h3>
+            <p class="price">£20</p>
+            <p class="deal">2 for £30</p>
+            <button onclick="addToCart('Garden Ornament',20)">Add to Cart</button>
         </div>
     </div>
 
@@ -179,40 +166,32 @@ footer {
         <img src="IMG_9481.jpg" onclick="openImg(this.src)">
         <div class="card-content">
             <h3>Garden Ornament</h3>
-            <p class="price">£35</p>
-            <button onclick="addToCart('Garden Ornament',35)">Add to Cart</button>
+            <p class="price">£20</p>
+            <p class="deal">2 for £30</p>
+            <button onclick="addToCart('Garden Ornament',20)">Add to Cart</button>
         </div>
     </div>
 
     <div class="card">
         <img src="IMG_9482.jpg" onclick="openImg(this.src)">
         <div class="card-content">
-            <h3>Water Feature</h3>
-            <p class="price">£120</p>
-            <button onclick="addToCart('Water Feature',120)">Add to Cart</button>
+            <h3>Garden Ornament</h3>
+            <p class="price">£20</p>
+            <p class="deal">2 for £30</p>
+            <button onclick="addToCart('Garden Ornament',20)">Add to Cart</button>
         </div>
     </div>
 
     <div class="card">
         <img src="IMG_9483.jpg" onclick="openImg(this.src)">
         <div class="card-content">
-            <h3>Planter</h3>
-            <p class="price">£30</p>
-            <button onclick="addToCart('Planter',30)">Add to Cart</button>
+            <h3>Garden Ornament</h3>
+            <p class="price">£20</p>
+            <p class="deal">2 for £30</p>
+            <button onclick="addToCart('Garden Ornament',20)">Add to Cart</button>
         </div>
     </div>
 
-</div>
-
-<section>
-    <h3>🚚 Delivery Info</h3>
-    <p>UK Delivery: £5</p>
-    <p>Free delivery on orders over £100</p>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="this.style.display='none'">
-    <img id="lightbox-img">
 </div>
 
 <footer>
@@ -233,13 +212,20 @@ function updateCart() {
     const paypalAmount = document.getElementById("paypal-amount");
 
     list.innerHTML = "";
+
     let total = 0;
+    let count = cart.length;
+
+    // Apply deal: 2 for £30
+    let pairs = Math.floor(count / 2);
+    let remaining = count % 2;
+
+    total = (pairs * 30) + (remaining * 20);
 
     cart.forEach(item => {
         const li = document.createElement("li");
-        li.textContent = item.name + " (£" + item.price + ")";
+        li.textContent = item.name;
         list.appendChild(li);
-        total += item.price;
     });
 
     totalEl.textContent = total;
@@ -251,6 +237,11 @@ function openImg(src) {
     document.getElementById("lightbox-img").src = src;
 }
 </script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="this.style.display='none'">
+    <img id="lightbox-img">
+</div>
 
 </body>
 </html>
