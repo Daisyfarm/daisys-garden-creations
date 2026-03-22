@@ -8,12 +8,15 @@
 </head>
 <body class="bg-amber-50 text-gray-800">
 
+<!-- Header -->
 <header class="bg-green-800 text-white p-6">
   <div class="max-w-6xl mx-auto flex justify-between">
     <h1 class="text-2xl font-bold">🌼 Daisy's Garden Creations</h1>
     <div>Cart: <span id="cart-count">0</span></div>
   </div>
 </header>
+
+<!-- Trust Bar -->
 <section class="bg-green-100 py-4">
   <div class="max-w-6xl mx-auto text-center grid md:grid-cols-3 gap-4 text-sm font-semibold">
     <div>📍 Based in the UK</div>
@@ -21,35 +24,48 @@
     <div>💳 Secure Payments via PayPal</div>
   </div>
 </section>
+
+<!-- Shop -->
 <section class="py-12 max-w-6xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-8">Shop</h2>
+  <h2 class="text-3xl font-bold text-center mb-8">Best Selling Ornaments</h2>
   <div class="grid md:grid-cols-3 gap-6">
 
-    <div class="bg-white p-4 rounded-xl shadow">
-      <h3 class="font-bold">Stone Statue</h3>
-      <p>£45</p>
-      <button onclick="addToCart('Stone Statue',45)" class="bg-green-700 text-white px-4 py-2 rounded mt-2">Add to Cart</button>
+    <!-- Product 1 -->
+    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+      <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" class="rounded-lg mb-4 h-48 w-full object-cover"/>
+      <h3 class="font-bold text-lg">Stone Statue</h3>
+      <p class="text-green-700 font-semibold mb-2">£45</p>
+      <span class="text-xs bg-yellow-200 px-2 py-1 rounded">⭐ Best Seller</span>
+      <button onclick="addToCart('Stone Statue',45)" class="bg-green-700 text-white px-4 py-2 rounded mt-3 w-full hover:bg-green-800">Add to Cart</button>
     </div>
 
-    <div class="bg-white p-4 rounded-xl shadow">
-      <h3 class="font-bold">Water Fountain</h3>
-      <p>£120</p>
-      <button onclick="addToCart('Water Fountain',120)" class="bg-green-700 text-white px-4 py-2 rounded mt-2">Add to Cart</button>
+    <!-- Product 2 -->
+    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+      <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8" class="rounded-lg mb-4 h-48 w-full object-cover"/>
+      <h3 class="font-bold text-lg">Water Fountain</h3>
+      <p class="text-green-700 font-semibold mb-2">£120</p>
+      <span class="text-xs bg-red-200 px-2 py-1 rounded">🔥 Popular</span>
+      <button onclick="addToCart('Water Fountain',120)" class="bg-green-700 text-white px-4 py-2 rounded mt-3 w-full hover:bg-green-800">Add to Cart</button>
     </div>
 
-    <div class="bg-white p-4 rounded-xl shadow">
-      <h3 class="font-bold">Planter</h3>
-      <p>£30</p>
-      <button onclick="addToCart('Planter',30)" class="bg-green-700 text-white px-4 py-2 rounded mt-2">Add to Cart</button>
+    <!-- Product 3 -->
+    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+      <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b" class="rounded-lg mb-4 h-48 w-full object-cover"/>
+      <h3 class="font-bold text-lg">Decorative Planter</h3>
+      <p class="text-green-700 font-semibold mb-2">£30</p>
+      <span class="text-xs bg-green-200 px-2 py-1 rounded">🌿 New</span>
+      <button onclick="addToCart('Planter',30)" class="bg-green-700 text-white px-4 py-2 rounded mt-3 w-full hover:bg-green-800">Add to Cart</button>
     </div>
 
   </div>
 </section>
 
+<!-- Cart -->
 <section class="max-w-4xl mx-auto py-10">
   <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
   <ul id="cart-items" class="mb-4"></ul>
   <p class="font-bold">Total: £<span id="total">0</span></p>
+  <p class="text-sm mt-2 text-green-700">🚚 Free delivery on orders over £50</p>
 </section>
 
 <!-- Order Form -->
@@ -60,11 +76,12 @@
     <input id="email" type="email" placeholder="Email Address" class="p-3 border rounded" required />
     <input id="address" type="text" placeholder="Delivery Address" class="p-3 border rounded" required />
     <textarea id="notes" placeholder="Order Notes (optional)" class="p-3 border rounded"></textarea>
-    <button class="bg-green-800 text-white py-3 rounded">Submit Order</button>
+    <button class="bg-green-800 text-white py-3 rounded hover:bg-green-900">Submit Order</button>
   </form>
   <p id="confirmation" class="mt-4 text-green-700 font-bold"></p>
 </section>
 
+<!-- Script -->
 <script>
 let cart = [];
 
@@ -78,3 +95,5 @@ function updateCart() {
   const totalEl = document.getElementById('total');
   const countEl = document.getElementById('cart-count');
 
+  cartItems.innerHTML = '';
+</html>
