@@ -9,68 +9,73 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: #f7f7f7;
+    background: #f4f6f4;
 }
 
+/* HEADER */
 header {
-    background: linear-gradient(135deg, #1b5e20, #43a047);
+    background: linear-gradient(135deg, #0d3b1e, #2e7d32);
     color: white;
     text-align: center;
-    padding: 50px 20px;
+    padding: 60px 20px;
 }
 
-section {
-    text-align: center;
-    padding: 25px;
+header h1 {
+    margin: 0;
+    font-size: 36px;
 }
 
+.offer {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #ffd54f;
+    font-weight: bold;
+}
+
+/* CART */
 .cart {
     position: fixed;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    right: 20px;
     background: white;
-    padding: 15px;
-    border-radius: 12px;
-    width: 260px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 18px;
+    border-radius: 14px;
+    width: 270px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 
+/* GRID */
 .container {
     max-width: 1200px;
     margin: auto;
-    padding: 30px;
+    padding: 40px 20px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 30px;
 }
 
+/* CARD */
 .card {
     background: white;
-    border-radius: 14px;
+    border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
 
 .card img {
     width: 100%;
-    height: 240px;
+    height: 250px;
     object-fit: cover;
-    cursor: pointer;
 }
 
 .card-content {
-    padding: 20px;
+    padding: 25px;
     text-align: center;
 }
 
 .price {
+    font-size: 22px;
     color: #1b5e20;
-    font-size: 20px;
     font-weight: bold;
 }
 
@@ -81,46 +86,25 @@ section {
 }
 
 button {
-    background: #1b5e20;
+    background: linear-gradient(135deg, #1b5e20, #43a047);
     color: white;
     border: none;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 8px;
+    padding: 14px;
+    margin-top: 12px;
+    border-radius: 10px;
     cursor: pointer;
     width: 100%;
 }
 
-button:hover {
-    background: #2e7d32;
-}
-
 .checkout {
     background: #ff9800;
-    margin-top: 10px;
 }
 
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-}
-
-.lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-}
-
+/* FOOTER */
 footer {
     text-align: center;
-    padding: 20px;
-    background: #1b5e20;
+    padding: 25px;
+    background: #0d3b1e;
     color: white;
 }
 </style>
@@ -131,7 +115,7 @@ footer {
 <header>
     <h1>🌼 Daisy's Garden Creations</h1>
     <p>Premium Handcrafted Garden Ornaments • UK Delivery</p>
-    <p class="deal">🔥 Special Offer: Any 2 for £30 🔥</p>
+    <div class="offer">🔥 Any 2 for £30 • Limited Time Offer</div>
 </header>
 
 <!-- CART -->
@@ -150,47 +134,49 @@ footer {
     </form>
 </div>
 
+<!-- PRODUCTS -->
 <div class="container">
 
-  <div class="card">
-    <img src="IMG_9480.jpg" onclick="openImg(this.src)">
-    <div class="card-content">
-        <h3>Sleeping Puppy with Kitten</h3>
-        <div class="price">£20</div>
-        <div class="deal">2 for £30</div>
-        <button onclick="addToCart('Sleeping Puppy with Kitten',20)">Add to Cart</button>
+    <div class="card">
+        <img src="IMG_9480.jpg">
+        <div class="card-content">
+            <h3>Sleeping Puppy with Kitten</h3>
+            <div class="price">£20</div>
+            <div class="deal">2 for £30</div>
+            <button onclick="addToCart('Sleeping Puppy with Kitten',20)">Add to Cart</button>
+        </div>
     </div>
-</div>
 
-  <div class="card">
-    <img src="IMG_9481.jpg" onclick="openImg(this.src)">
-    <div class="card-content">
-        <h3>Sleeping Puppy with Kitten</h3>
-        <div class="price">£20</div>
-        <div class="deal">2 for £30</div>
-        <button onclick="addToCart('Sleeping Puppy with Kitten',20)">Add to Cart</button>
+    <div class="card">
+        <img src="IMG_9481.jpg">
+        <div class="card-content">
+            <h3>Cute Lion</h3>
+            <div class="price">£20</div>
+            <div class="deal">2 for £30</div>
+            <button onclick="addToCart('Cute Lion',20)">Add to Cart</button>
+        </div>
     </div>
-</div>
 
-   <div class="card">
-    <img src="IMG_9482.jpg" onclick="openImg(this.src)">
-    <div class="card-content">
-        <h3>Sleeping Puppy with Kitten</h3>
-        <div class="price">£20</div>
-        <div class="deal">2 for £30</div>
-        <button onclick="addToCart('Sleeping Puppy with Kitten',20)">Add to Cart</button>
+    <div class="card">
+        <img src="IMG_9482.jpg">
+        <div class="card-content">
+            <h3>Garden Ornament</h3>
+            <div class="price">£20</div>
+            <div class="deal">2 for £30</div>
+            <button onclick="addToCart('Garden Ornament',20)">Add to Cart</button>
+        </div>
     </div>
-</div>
 
-   <div class="card">
-    <img src="IMG_9483.jpg" onclick="openImg(this.src)">
-    <div class="card-content">
-        <h3>Cute Lion</h3>
-        <div class="price">£20</div>
-        <div class="deal">2 for £30</div>
-        <button onclick="addToCart('Cute Lion',20)">Add to Cart</button>
+    <div class="card">
+        <img src="IMG_9483.jpg">
+        <div class="card-content">
+            <h3>Garden Ornament</h3>
+            <div class="price">£20</div>
+            <div class="deal">2 for £30</div>
+            <button onclick="addToCart('Garden Ornament',20)">Add to Cart</button>
+        </div>
     </div>
-</div>
+
 </div>
 
 <footer>
@@ -212,14 +198,11 @@ function updateCart() {
 
     list.innerHTML = "";
 
-    let total = 0;
     let count = cart.length;
-
-    // Apply deal: 2 for £30
     let pairs = Math.floor(count / 2);
     let remaining = count % 2;
 
-    total = (pairs * 30) + (remaining * 20);
+    let total = (pairs * 30) + (remaining * 20);
 
     cart.forEach(item => {
         const li = document.createElement("li");
@@ -230,17 +213,7 @@ function updateCart() {
     totalEl.textContent = total;
     paypalAmount.value = total.toFixed(2);
 }
-
-function openImg(src) {
-    document.getElementById("lightbox").style.display = "flex";
-    document.getElementById("lightbox-img").src = src;
-}
 </script>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="this.style.display='none'">
-    <img id="lightbox-img">
-</div>
 
 </body>
 </html>
