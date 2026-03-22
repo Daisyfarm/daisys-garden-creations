@@ -1,99 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daisy's Garden Creations</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-amber-50 text-gray-800">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daisy's Garden Creations</title>
 
-<!-- Header -->
-<header class="bg-green-800 text-white p-6">
-  <div class="max-w-6xl mx-auto flex justify-between">
-    <h1 class="text-2xl font-bold">🌼 Daisy's Garden Creations</h1>
-    <div>Cart: <span id="cart-count">0</span></div>
-  </div>
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8f8f8;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #1b5e20, #43a047);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* CART */
+.cart {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    width: 260px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.cart h3 {
+    margin: 0 0 10px;
+}
+
+.cart ul {
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.checkout {
+    background: #ff9800;
+}
+
+/* GRID */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* IMAGE */
+.card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* CONTENT */
+.card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.price {
+    color: #1b5e20;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* BUTTON */
+button {
+    background: #1b5e20;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 15px;
+}
+
+button:hover {
+    background: #2e7d32;
+}
+
+/* LIGHTBOX */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌼 Daisy's Garden Creations</h1>
+    <p>Premium Handcrafted Garden Ornaments • UK Delivery</p>
 </header>
 
-<!-- Trust Bar -->
-<section class="bg-green-100 py-4">
-  <div class="max-w-6xl mx-auto text-center grid md:grid-cols-3 gap-4 text-sm font-semibold">
-    <div>📍 Based in the UK</div>
-    <div>🚚 Fast UK Delivery</div>
-    <div>💳 Secure Payments via PayPal</div>
-  </div>
-</section>
+<!-- CART -->
+<div class="cart">
+    <h3>🛒 Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: £<span id="total">0</span></strong></p>
 
-<!-- Shop -->
-<section class="py-12 max-w-6xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-8">Best Selling Ornaments</h2>
-  <div class="grid md:grid-cols-3 gap-6">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="adsgardenornaments123@outlook.com">
+        <input type="hidden" name="item_name" value="Garden Order">
+        <input type="hidden" name="amount" id="paypal-amount" value="0">
+        <input type="hidden" name="currency_code" value="GBP">
+        <input type="submit" value="Checkout" class="checkout">
+    </form>
+</div>
 
-    <!-- Product 1 -->
-    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-      <img src="https://images.unsplash.com/photo-1599423300746-b62533397364" class="rounded-lg mb-4 h-48 w-full object-cover"/>
-      <h3 class="font-bold text-lg">Stone Statue</h3>
-      <p class="text-green-700 font-semibold mb-2">£45</p>
-      <span class="text-xs bg-yellow-200 px-2 py-1 rounded">⭐ Best Seller</span>
-      <button onclick="addToCart('Stone Statue',45)" class="bg-green-700 text-white px-4 py-2 rounded mt-3 w-full hover:bg-green-800">Add to Cart</button>
+<div class="container">
+
+    <div class="card">
+        <img src="output_images/IMG_9480.JPG" onclick="openImg(this.src)">
+        <div class="card-content">
+            <h3>Stone Statue</h3>
+            <p class="price">£45</p>
+            <button onclick="addToCart('Stone Statue',45)">Add to Cart</button>
+        </div>
     </div>
 
-    <!-- Product 2 -->
-    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-      <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8" class="rounded-lg mb-4 h-48 w-full object-cover"/>
-      <h3 class="font-bold text-lg">Water Fountain</h3>
-      <p class="text-green-700 font-semibold mb-2">£120</p>
-      <span class="text-xs bg-red-200 px-2 py-1 rounded">🔥 Popular</span>
-      <button onclick="addToCart('Water Fountain',120)" class="bg-green-700 text-white px-4 py-2 rounded mt-3 w-full hover:bg-green-800">Add to Cart</button>
+    <div class="card">
+        <img src="output_images/IMG_9481.JPG" onclick="openImg(this.src)">
+        <div class="card-content">
+            <h3>Garden Ornament</h3>
+            <p class="price">£35</p>
+            <button onclick="addToCart('Garden Ornament',35)">Add to Cart</button>
+        </div>
     </div>
 
-    <!-- Product 3 -->
-    <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-      <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b" class="rounded-lg mb-4 h-48 w-full object-cover"/>
-      <h3 class="font-bold text-lg">Decorative Planter</h3>
-      <p class="text-green-700 font-semibold mb-2">£30</p>
-      <span class="text-xs bg-green-200 px-2 py-1 rounded">🌿 New</span>
-      <button onclick="addToCart('Planter',30)" class="bg-green-700 text-white px-4 py-2 rounded mt-3 w-full hover:bg-green-800">Add to Cart</button>
+    <div class="card">
+        <img src="output_images/IMG_9482.JPG" onclick="openImg(this.src)">
+        <div class="card-content">
+            <h3>Water Feature</h3>
+            <p class="price">£120</p>
+            <button onclick="addToCart('Water Feature',120)">Add to Cart</button>
+        </div>
     </div>
 
-  </div>
-</section>
+    <div class="card">
+        <img src="output_images/IMG_9483.JPG" onclick="openImg(this.src)">
+        <div class="card-content">
+            <h3>Planter</h3>
+            <p class="price">£30</p>
+            <button onclick="addToCart('Planter',30)">Add to Cart</button>
+        </div>
+    </div>
 
-<!-- Cart -->
-<section class="max-w-4xl mx-auto py-10">
-  <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
-  <ul id="cart-items" class="mb-4"></ul>
-  <p class="font-bold">Total: £<span id="total">0</span></p>
-  <p class="text-sm mt-2 text-green-700">🚚 Free delivery on orders over £50</p>
-</section>
+</div>
 
-<!-- Order Form -->
-<section class="max-w-4xl mx-auto py-10 bg-white p-6 rounded-xl shadow">
-  <h2 class="text-2xl font-bold mb-6">Place Your Order</h2>
-  <form onsubmit="submitOrder(event)" class="grid gap-4">
-    <input id="name" type="text" placeholder="Full Name" class="p-3 border rounded" required />
-    <input id="email" type="email" placeholder="Email Address" class="p-3 border rounded" required />
-    <input id="address" type="text" placeholder="Delivery Address" class="p-3 border rounded" required />
-    <textarea id="notes" placeholder="Order Notes (optional)" class="p-3 border rounded"></textarea>
-    <button class="bg-green-800 text-white py-3 rounded hover:bg-green-900">Submit Order</button>
-  </form>
-  <p id="confirmation" class="mt-4 text-green-700 font-bold"></p>
-</section>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="this.style.display='none'">
+    <img id="lightbox-img">
+</div>
 
-<!-- Script -->
 <script>
 let cart = [];
 
 function addToCart(name, price) {
-  cart.push({name, price});
-  updateCart();
+    cart.push({name, price});
+    updateCart();
 }
 
 function updateCart() {
-  const cartItems = document.getElementById('cart-items');
-  const totalEl = document.getElementById('total');
-  const countEl = document.getElementById('cart-count');
+    const list = document.getElementById("cart-items");
+    const totalEl = document.getElementById("total");
+    const paypalAmount = document.getElementById("paypal-amount");
 
-  cartItems.innerHTML = '';
+    list.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item.name + " (£" + item.price + ")";
+        list.appendChild(li);
+        total += item.price;
+    });
+
+    totalEl.textContent = total;
+    paypalAmount.value = total.toFixed(2);
+}
+
+function openImg(src) {
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-img").src = src;
+}
+</script>
+
+</body>
 </html>
