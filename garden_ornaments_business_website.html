@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daisy's Garden Creations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-amber-50 text-gray-800">
+
+<header class="bg-green-800 text-white p-6">
+  <div class="max-w-6xl mx-auto flex justify-between">
+    <h1 class="text-2xl font-bold">🌼 Daisy's Garden Creations</h1>
+    <div>Cart: <span id="cart-count">0</span></div>
+  </div>
+</header>
+
+<section class="py-12 max-w-6xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-8">Shop</h2>
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <h3 class="font-bold">Stone Statue</h3>
+      <p>£45</p>
+      <button onclick="addToCart('Stone Statue',45)" class="bg-green-700 text-white px-4 py-2 rounded mt-2">Add to Cart</button>
+    </div>
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <h3 class="font-bold">Water Fountain</h3>
+      <p>£120</p>
+      <button onclick="addToCart('Water Fountain',120)" class="bg-green-700 text-white px-4 py-2 rounded mt-2">Add to Cart</button>
+    </div>
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <h3 class="font-bold">Planter</h3>
+      <p>£30</p>
+      <button onclick="addToCart('Planter',30)" class="bg-green-700 text-white px-4 py-2 rounded mt-2">Add to Cart</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-4xl mx-auto py-10">
+  <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+  <ul id="cart-items" class="mb-4"></ul>
+  <p class="font-bold">Total: £<span id="total">0</span></p>
+</section>
+
+<!-- Order Form -->
+<section class="max-w-4xl mx-auto py-10 bg-white p-6 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Place Your Order</h2>
+  <form onsubmit="submitOrder(event)" class="grid gap-4">
+    <input id="name" type="text" placeholder="Full Name" class="p-3 border rounded" required />
+    <input id="email" type="email" placeholder="Email Address" class="p-3 border rounded" required />
+    <input id="address" type="text" placeholder="Delivery Address" class="p-3 border rounded" required />
+    <textarea id="notes" placeholder="Order Notes (optional)" class="p-3 border rounded"></textarea>
+    <button class="bg-green-800 text-white py-3 rounded">Submit Order</button>
+  </form>
+  <p id="confirmation" class="mt-4 text-green-700 font-bold"></p>
+</section>
+
+<script>
+let cart = [];
+
+function addToCart(name, price) {
+  cart.push({name, price});
+  updateCart();
+}
+
+function updateCart() {
+  const cartItems = document.getElementById('cart-items');
+  const totalEl = document.getElementById('total');
+  const countEl = document.getElementById('cart-count');
+
+  cartItems.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.name} - £${item.price}`;
+    cartItems.appendChild(li);
+    total += item.price;
+  });
+
+  totalEl.textContent = total;
+  countEl.textContent = cart.length;
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const address = document.getElementById('address').value;
+
+  let orderSummary = cart.map(item => `${item.name} (£${item.price})`).join(', ');
+  let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  const subject = encodeURIComponent('New Order - Daisy\'s Garden Creations');
+  const body = encodeURIComponent(
+    `Name: ${name}
+Email: ${email}
+Address: ${address}
+
+Items: ${orderSummary}
+Total: £${total}`
+  );
+
+  window.location.href = `mailto:adsgardenornaments123@outlook.com?subject=${subject}&body=${body}`;
+
+  document.getElementById('confirmation').textContent = "Opening your email app to send order...";
+
+  cart = [];
+  updateCart();
+} (£${item.price})`).join(', ');
+  let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  const message = `New Order:\nName: ${name}\nEmail: ${email}\nAddress: ${address}\nItems: ${orderSummary}\nTotal: £${total}`;
+
+  console.log(message);
+
+  document.getElementById('confirmation').textContent = "Order submitted! We'll contact you shortly for payment.";
+
+  cart = [];
+  updateCart();
+}
+</script>
+
+</body>
+</html>
